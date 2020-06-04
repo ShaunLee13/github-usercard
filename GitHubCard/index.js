@@ -3,9 +3,14 @@
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+const cardholder = document.querySelector('.cards')
+//Data stored at result.data
 axios.get('https://api.github.com/users/ShaunLee13')
-  .then(data => {
-    console.log(`Here is your data: ${data}`)
+  .then(result => {
+    console.log(`Here is your data: ${result.data}`)
+    
+    const newCard = userMaker(result.data)
+    cardholder.appendChild(newCard)
   })
   .catch(error => {
     debugger
@@ -38,7 +43,16 @@ axios.get('https://api.github.com/users/ShaunLee13')
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+  'ShaunLee13',
+  'tetondan',
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell',
+  'leachcoding'
+]
+
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -59,55 +73,55 @@ const followersArray = [];
       </div>
     </div>
 */
-function userMaker(user){
-  const {avatar_url, bio, followers, following, html_url, location, login, name} = user
+  function userMaker(user){
+    const {avatar_url, bio, followers, following, html_url, location, login, name} = user
 
-  //Declare Components
-  const card = document.createElement('div')
-  const imagePull = document.createElement('img')
-  const cardInfo = document.createElement('div')
-  const namePull = document.createElement('h3')
-  const usernamePull = document.createElement('p')
-  const locationPull = document.createElement('p')
-  const profile = document.createElement('p')
-  const profileLinkPull = document.createElement('a')
-  const followersPull = document.createElement('p')
-  const followingPull = document.createElement('p')
-  const bioPull = document.createElement('p')
+    //Declare Components
+    const card = document.createElement('div')
+    const imagePull = document.createElement('img')
+    const cardInfo = document.createElement('div')
+    const namePull = document.createElement('h3')
+    const usernamePull = document.createElement('p')
+    const locationPull = document.createElement('p')
+    const profile = document.createElement('p')
+    const profileLinkPull = document.createElement('a')
+    const followersPull = document.createElement('p')
+    const followingPull = document.createElement('p')
+    const bioPull = document.createElement('p')
 
-  //Basic Skeleton
-  card.appendChild(imagePull)
-  card.appendChild(cardInfo)
-  cardInfo.appendChild(namePull)
-  cardInfo.appendChild(usernamePull)
-  cardInfo.appendChild(locationPull)
-  cardInfo.appendChild(profile)
-  cardInfo.appendChild(followersPull)
-  cardInfo.appendChild(followingPull)
-  cardInfo.appendChild(bioPull)
+    //Assign Necessary Classes & Attrs
+    card.classList.add('card')
+    cardInfo.classList.add('card-info')
+    namePull.classList.add('name')
+    usernamePull.classList.add('username')
+    profileLinkPull.href = html_url
+    imagePull.src = `${avatar_url}`
 
-  //Assign Necessary Classes & Attrs
-  card.classList.add('class')
-  cardInfo.classList.add('card-info')
-  namePull.classList.add('name')
-  usernamePull.classList.add('username')
-  profileLinkPull.href = html_url
-  imagePull.src = avatar_url
+    //Attach TextContent
+    namePull.textContent = name
+    usernamePull.textContent = login
+    locationPull.textContent = `Location: ${location}`
+    profile.textContent = `Profile: `
+    profileLinkPull.textContent = html_url
+    followersPull.textContent = `Followers: ${followers}`
+    followingPull.textContent = `Following: ${following}`
+    bioPull.textContent = `Bio: ${bio}`
 
-  //Attach TextContent
-  namePull.textContent = name
-  usernamePull.textContent = login
-  locationPull.textContent = `Location: ${location}`
-  profile.textContent = `Profile: ${profileLinkPull}`
-  profileLinkPull.textContent = html_url
-  followersPull.textContent = `Followers: ${followers}`
-  followingPull.textContent = `Following: ${following}`
-  bioPull.textContent = `Bio: ${bio}`
+    //Basic Skeleton
+    card.appendChild(imagePull)
+    card.appendChild(cardInfo)
+    cardInfo.appendChild(namePull)
+    cardInfo.appendChild(usernamePull)
+    cardInfo.appendChild(locationPull)
+    cardInfo.appendChild(profile)
+    profile.appendChild(profileLinkPull)
+    cardInfo.appendChild(followersPull)
+    cardInfo.appendChild(followingPull)
+    cardInfo.appendChild(bioPull)
 
+    return card
+  }
 
-  console.log(card)
-}
-userMaker({avatar_url:'https://this.com', bio:'a', followers:'2 followers', following : '1 following', html_url:'https://nope.com', location:'a', login:'a', name:'a'})
 /*
   List of LS Instructors Github username's:
     tetondan
