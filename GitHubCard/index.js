@@ -5,7 +5,6 @@
 */
 axios.get('https://api.github.com/users/ShaunLee13')
   .then(data => {
-    debugger
     console.log(`Here is your data: ${data}`)
   })
   .catch(error => {
@@ -61,7 +60,7 @@ const followersArray = [];
     </div>
 */
 function userMaker(user){
-  const {avatar_url, bio, followers, following, html_url, location, name} = user
+  const {avatar_url, bio, followers, following, html_url, location, login, name} = user
 
   //Declare Components
   const card = document.createElement('div')
@@ -70,7 +69,7 @@ function userMaker(user){
   const namePull = document.createElement('h3')
   const usernamePull = document.createElement('p')
   const locationPull = document.createElement('p')
-  const profilePull = document.createElement('p')
+  const profile = document.createElement('p')
   const profileLinkPull = document.createElement('a')
   const followersPull = document.createElement('p')
   const followingPull = document.createElement('p')
@@ -82,23 +81,33 @@ function userMaker(user){
   cardInfo.appendChild(namePull)
   cardInfo.appendChild(usernamePull)
   cardInfo.appendChild(locationPull)
-  cardInfo.appendChild(profilePull)
-  profilePull.appendChild(profileLinkPull)
+  cardInfo.appendChild(profile)
   cardInfo.appendChild(followersPull)
   cardInfo.appendChild(followingPull)
   cardInfo.appendChild(bioPull)
 
-  //Assign Necessary Classes
+  //Assign Necessary Classes & Attrs
   card.classList.add('class')
   cardInfo.classList.add('card-info')
   namePull.classList.add('name')
   usernamePull.classList.add('username')
+  profileLinkPull.href = html_url
+  imagePull.src = avatar_url
 
+  //Attach TextContent
+  namePull.textContent = name
+  usernamePull.textContent = login
+  locationPull.textContent = `Location: ${location}`
+  profile.textContent = `Profile: ${profileLinkPull}`
+  profileLinkPull.textContent = html_url
+  followersPull.textContent = `Followers: ${followers}`
+  followingPull.textContent = `Following: ${following}`
+  bioPull.textContent = `Bio: ${bio}`
 
 
   console.log(card)
 }
-userMaker('a','a',1,1,'a','a','a')
+userMaker({avatar_url:'https://this.com', bio:'a', followers:'2 followers', following : '1 following', html_url:'https://nope.com', location:'a', login:'a', name:'a'})
 /*
   List of LS Instructors Github username's:
     tetondan
