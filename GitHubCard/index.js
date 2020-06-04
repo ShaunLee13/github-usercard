@@ -3,7 +3,18 @@
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-
+axios.get('https://api.github.com/users/ShaunLee13')
+  .then(data => {
+    debugger
+    console.log(`Here is your data: ${data}`)
+  })
+  .catch(error => {
+    debugger
+    console.log(`This is your error: ${error}`)
+  })
+  .finally( () => {
+    console.log('done')
+  })
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -49,7 +60,45 @@ const followersArray = [];
       </div>
     </div>
 */
+function userMaker(user){
+  const {avatar_url, bio, followers, following, html_url, location, name} = user
 
+  //Declare Components
+  const card = document.createElement('div')
+  const imagePull = document.createElement('img')
+  const cardInfo = document.createElement('div')
+  const namePull = document.createElement('h3')
+  const usernamePull = document.createElement('p')
+  const locationPull = document.createElement('p')
+  const profilePull = document.createElement('p')
+  const profileLinkPull = document.createElement('a')
+  const followersPull = document.createElement('p')
+  const followingPull = document.createElement('p')
+  const bioPull = document.createElement('p')
+
+  //Basic Skeleton
+  card.appendChild(imagePull)
+  card.appendChild(cardInfo)
+  cardInfo.appendChild(namePull)
+  cardInfo.appendChild(usernamePull)
+  cardInfo.appendChild(locationPull)
+  cardInfo.appendChild(profilePull)
+  profilePull.appendChild(profileLinkPull)
+  cardInfo.appendChild(followersPull)
+  cardInfo.appendChild(followingPull)
+  cardInfo.appendChild(bioPull)
+
+  //Assign Necessary Classes
+  card.classList.add('class')
+  cardInfo.classList.add('card-info')
+  namePull.classList.add('name')
+  usernamePull.classList.add('username')
+
+
+
+  console.log(card)
+}
+userMaker('a','a',1,1,'a','a','a')
 /*
   List of LS Instructors Github username's:
     tetondan
