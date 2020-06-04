@@ -4,11 +4,10 @@
     https://api.github.com/users/<your name>
 */
 const cardholder = document.querySelector('.cards')
-//Data stored at result.data
-axios.get('https://api.github.com/users/ShaunLee13')
+
+function cardBuilder(user){
+axios.get(`https://api.github.com/users/${user}`)
   .then(result => {
-    console.log(`Here is your data: ${result.data}`)
-    
     const newCard = userMaker(result.data)
     cardholder.appendChild(newCard)
   })
@@ -19,6 +18,7 @@ axios.get('https://api.github.com/users/ShaunLee13')
   .finally( () => {
     console.log('done')
   })
+}
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -53,7 +53,9 @@ const followersArray = [
   'leachcoding'
 ]
 
-
+followersArray.forEach((username) => {
+  cardBuilder(username)
+})
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
     Using DOM methods and properties, create and return the following markup:
